@@ -39,7 +39,7 @@ if (isset($_POST['usertype_btn'])) {
 
 // enable or disable user 
 if (isset($_POST['eduser_btn'])) {
-    $enable_disable = $_POST['enabledisable '];
+    $enable_disable = $_POST['enabledisable'];
     $uid = $_POST['enabledisable-user-id'];
     if ($enable_disable == "disable") {
         $updatedUser = $auth->disableUser($uid);
@@ -83,18 +83,36 @@ if (isset($_POST['updateuserpassword_btn'])) {
 }
 // update user account info
 if (isset($_POST['updateuser_btn'])) {
+    $randomnum = rand(1111, 9999);
     $email = $_POST['display_useremail'];
     $displayName = $_POST['display_userfullname'];
+    $photo = $_FILES['display_imgfile']['name'];
     $uid = $_POST['user-id'];
+    $user = $auth->getUser($uid);
+    $newimg = $randomnum . $photo;
+    $oldimg = $user->photoUrl;
+
+    if ($photo != NULL) {
+        $filename = 'uploads/' . $newimg;
+    } else {
+        $filename =  $oldimg;
+    }
     $properties = [
         'displayName' => $displayName,
         'email' =>  $email,
+        'photoUrl' => $filename,
     ];
 
     $updatedUser = $auth->updateUser($uid, $properties);
     // $updatedUser = $auth->changeUserEmail($uid, $properties);
 
     if ($updatedUser) {
+        if ($photo != NULL) {
+            move_uploaded_file($_FILES['display_imgfile']['tmp_name'], "uploads/" . $newimg);
+            if ($oldimg != NULL) {
+                unlink($oldimg);
+            }
+        }
         $_SESSION['updatedusersucess'] = "Success!";
         header('Location: systemusers.php');
         exit();
@@ -122,13 +140,17 @@ if (isset($_POST['removeuser_btn'])) {
 
 // register user 
 if (isset($_POST['registeruser_btn'])) {
+    $randomnum = rand(1111, 9999);
+    $randomgen = bin2hex(random_bytes(16));
+    $milliseconds = floor(microtime(true) * 1000);
     $useremail = $_POST['useremail'];
     $userfullaname = $_POST['userfname'] . ' ' . $_POST['userlname'];
     $roles = $_POST['role'];
     $userpassword = $_POST['userpassword'];
+    $image = $_FILES['imgfile']['name'];
+    $newimage = $randomnum . $image;
+    $filename = 'uploads/' . $newimage;
     // generates random id for user
-    $randomgen = base64_encode(random_bytes(10));
-    $milliseconds = floor(microtime(true) * 1000);
     $customuiid = $randomgen . $milliseconds;
     $userProperties = [
         'uid' => $customuiid,
@@ -136,6 +158,7 @@ if (isset($_POST['registeruser_btn'])) {
         'emailVerified' => false,
         'password' => $userpassword,
         'displayName' => $userfullaname,
+        'photoUrl' => $filename,
         'disabled' => false,
     ];
     try {
@@ -143,11 +166,10 @@ if (isset($_POST['registeruser_btn'])) {
         if ($createdUser) {
             if ($roles == "admin") {
                 $auth->setCustomUserClaims($customuiid, ['admin' => true]);
-                $msg = "User role has been set to Administrator";
             } elseif ($roles == "staff") {
                 $auth->setCustomUserClaims($customuiid, ['staff' => true]);
-                $msg = "User role has been set to Staff";
             }
+            move_uploaded_file($_FILES['imgfile']['tmp_name'], "uploads/" . $newimage);
             $_SESSION['createdusersuccess'] = "Success!";
             header('Location: systemusers.php');
             exit();

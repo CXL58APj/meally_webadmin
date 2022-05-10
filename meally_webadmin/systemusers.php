@@ -410,7 +410,7 @@ include('adminauth.php');
               </div>
             </div>
             <div class="card-body px-5">
-              <form action="code.php" method="POST" role="form" class="text-start">
+              <form action="code.php" method="POST" class="text-start" enctype="multipart/form-data">
                 <h6 class=" text-left mt-1 mb-0 text-sm">Please complete the fields below:</h6>
                 <div class="input-group input-group-outline my-3">
                   <label class="form-label">Email</label>
@@ -433,6 +433,15 @@ include('adminauth.php');
                 <div class="input-group input-group-outline mb-3">
                   <label class="form-label">Password</label>
                   <input type="password" name="userpassword" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Profile Picture</label>
+                  <div class="form-group border mb-3">
+                    <img src="" id="img" alt="Profile Picture" class="w-50">
+                  </div>
+                  <div class="input-group input-group-outline mb-4" class="form-control" required>
+                    <input type="file" name="imgfile" id="imgfile">
+                  </div>
                 </div>
                 <div class="text-left">
                   <button type="submit" name="registeruser_btn" class="btn bg-gradient-primary my-2 mb-2">Create User</button>
@@ -504,6 +513,15 @@ include('adminauth.php');
       </div>
     </div>
   </div>
+  <!-- preview image  -->
+  <script>
+    imgfile.onchange = evt => {
+      const [file] = imgfile.files;
+      if (file) {
+        img.src = URL.createObjectURL(file);
+      }
+    }
+  </script>
   <!--   Core JS Files   -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

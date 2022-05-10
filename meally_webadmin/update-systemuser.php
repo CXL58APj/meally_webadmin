@@ -225,21 +225,26 @@ if ($link) {
                     <div class="card my-5">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
-                                <h6 class="text-white text-capitalize ps-3" id="cnu"> Account Information</h6>
+                                <h6 class="text-white text-capitalize ps-3" id="cnu"> Accounts Information</h6>
                             </div>
                         </div>
                         <div class="card-body px-5">
-                            <form action="code.php" method="POST" role="form" class="text-start">
+                            <form action="code.php" method="POST" role="form" class="text-start" enctype="multipart/form-data">
                                 <?php
-                                include('dbcon.php');
+                                require_once('dbcon.php');
 
                                 if (isset($_GET['id'])) {
-                                    $uid = $_GET['id'];
-
+                                    $uid = ($_GET['id']);
                                     try {
                                         $user = $auth->getUser($uid);
                                 ?>
                                         <input type="hidden" name="user-id" value="<?= $uid; ?>">
+                                        <div class="input-group input-group-static mb-4">
+                                            <img src="<?= $user->photoUrl; ?>" id="img" alt="pfp" srcset="" class="w-25">
+                                            <div class="input-group input-group-outline mb-4" class="form-control">
+                                                <input type="file" name="display_imgfile" id="display_imgfile">
+                                            </div>
+                                        </div>
                                         <div class="input-group input-group-static mb-4">
                                             <label>Email</label>
                                             <input type="email" name="display_useremail" value="<?= $user->email; ?>" class="form-control" required>
@@ -475,6 +480,14 @@ if ($link) {
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        display_imgfile.onchange = evt => {
+            const [file] = display_imgfile.files;
+            if (file) {
+                img.src = URL.createObjectURL(file);
+            }
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
