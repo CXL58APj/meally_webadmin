@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v=3.0.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <?php
 include('authentication.php');
 ?>
@@ -77,7 +63,7 @@ include('authentication.php');
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href= "stores.php">
+          <a class="nav-link text-white " href="#">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -85,7 +71,7 @@ include('authentication.php');
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="customers.php">
+          <a class="nav-link text-white " href="#">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -197,7 +183,7 @@ include('authentication.php');
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <h4 class="mb-0">0</h4>
+                <h4 class="mb-0">100</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -214,7 +200,7 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">0</h4>
+                <h4 class="mb-0">50</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -231,7 +217,7 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">0</h4>
+                <h4 class="mb-0">52</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -247,7 +233,7 @@ include('authentication.php');
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <h4 class="mb-0">0</h4>
+                <h4 class="mb-0">30</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -261,7 +247,7 @@ include('authentication.php');
       <div class="row mt-4">
         <!-- Start : Login success welcome message -->
         <?php
-        if (isset($_SESSION['status'])) {
+        if (isset($_SESSION['loggedinsuccess'])) {
           echo
           "<div class='alert alert-success alert-dismissible fade show' role='alert' style='color:white;'>
                     <span class='alert-icon align-middle'>
@@ -269,12 +255,12 @@ include('authentication.php');
                       thumb_up_off_alt
                       </span>
                     </span>
-                    <span class='alert-text'><strong>" . $_SESSION['status'] . "</strong> — Welcome back " . $_SESSION['user'] . "</span>
+                    <span class='alert-text'><strong>" . $_SESSION['loggedinsuccess'] . "</strong> — Welcome back " . $_SESSION['user'] . "</span>
                     <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
                 </div>";
-          unset($_SESSION['status']);
+          unset($_SESSION['loggedinsuccess']);
         }
         ?>
         <!-- End : Login success welcome message -->
@@ -291,195 +277,50 @@ include('authentication.php');
                   <table id="example" class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owner</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Store Name</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Registered</th>
-                        <th class="text-secondary opacity-7"></th>
-                        <th class="text-secondary opacity-7"></th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-5">#</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Store</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Owner</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 w-10">Controls</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="d-flex px-3">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-0">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="align-middle text-center text-sm">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          </div>
-                        </td>
-                        <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
-                        </td>
-                        <td class="align-middle">
-                          <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
+                      <?php
+                      include('dbcon.php');
+                      $ref_table = 'stores';
+                      $fetcheddata = $database->getReference($ref_table)
+                        ->orderByChild('status')
+                        ->equalTo('new')
+                        ->getValue();
+                      if ($fetcheddata > 0) {
+                        $i = 1;
+                        foreach ($fetcheddata as $key => $row) {
+                      ?>
+                          <tr>
+                            <td><?= $i++; ?></td>
+                            <td>
+                              <div class="d-flex px-2 py-1">
+                                <div>
+                                  <img src="<?= $row['storepfp'] ?>" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="mb-0 text-sm"><?= $row['storename'] ?></h6>
+                                  <p class="text-xs text-secondary mb-0"><?= $row['storeaddress'] ?></p>
+                                </div>
+                              </div>
+                            </td>
+                            <td><?= $row['storeowner'] ?></td>
+                            <td>
+                              <a href="storereview.php?id=<?= $key; ?>" name="view_btn" class="btn btn-info btn-sm">
+                                View
+                              </a>
+                            </td>
+                          </tr>
+                      <?php
+                        }
+                      } else {
+                      }
+                      ?>
+
                     </tbody>
                   </table>
                 </div>
