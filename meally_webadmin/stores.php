@@ -64,7 +64,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="stores.php">
+          <a class="nav-link text-white active bg-gradient-primary " href="stores.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -83,7 +83,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">System Management</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary " href="systemusers.php">
+          <a class="nav-link text-white" href="systemusers.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -104,7 +104,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">System Management</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Management</li>
+            <li class="font-weight-bolder mb-0 breadcrumb-item text-sm text-dark active" aria-current="page">Stores </li>
+
           </ol>
           </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -175,7 +177,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
-                <h6 class="text-white text-capitalize ps-3"> List of Stores</h6>
+                <h6 class="text-white text-capitalize ps-3">Active Stores</h6>
               </div>
             </div>
             <div class="card-body px-5">
@@ -183,11 +185,10 @@
                 <table id ="example" class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Address</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-5">#</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
                     </tr>
                   <tbody>
                   <?php
@@ -204,8 +205,17 @@
                           ?>
                           <tr>
                             <td><?=$i++;?></td>
-                            <td><?=$row['storename'];?></td>
-                            <td><?=$row['storeaddress'];?></td>
+                            <td>
+                            <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="<?=$row['storepfp'];?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><?=$row['storename'];?></h6>
+                            <p class="text-xs text-secondary mb-0"><?=$row['storeaddress'];?></p>
+                          </div>
+                        </div>
+                            </td>
                             <td><?=$row['storeowner'];?></td>
                             <td><?=$row['storebin'];?></td>
                           </tr>
