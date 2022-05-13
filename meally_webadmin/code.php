@@ -17,8 +17,8 @@ $datetoday =  date("F j, Y, g:i a");
 
 
 //decline store
-if (isset($_POST['decline_btn'])) {
-    $storekey = $_POST['decline_btn'];
+if (isset($_POST['declinestore_btn'])) {
+    $storekey = $_POST['declinestore_btn'];
     $updateData = [
         'status' => 'declined',
     ];

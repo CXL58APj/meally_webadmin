@@ -217,7 +217,7 @@ include('authentication.php');
                                                 <div class="nav-wrapper position-relative text-end">
                                                     <form action="code.php" method="POST">
                                                         <button type="submit" name="acceptstore_btn" value="<?= $keychild; ?>" class="btn bg-gradient-success">ACCEPT</button>
-                                                        <button type="button" name="declinestore_btn" value="<?= $keychild; ?>" class="btn bg-gradient-danger">DECLINE</button>
+                                                        <button type="submit" name="declinestore_btn" value="<?= $keychild; ?>" class="btn bg-gradient-danger">DECLINE</button>
                                                     </form>
                                                 </div>
                                             </div>
