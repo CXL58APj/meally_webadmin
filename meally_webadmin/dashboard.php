@@ -263,7 +263,7 @@ include('authentication.php');
           unset($_SESSION['loggedinsuccess']);
         }
         ?>
-        <!-- End : Login success welcome message -->
+
         <div class="row">
           <div class="col-12">
             <div class="card my-4">

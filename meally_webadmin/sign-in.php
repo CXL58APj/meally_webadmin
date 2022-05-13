@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.0.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <?php
 session_start();
 
@@ -89,6 +75,7 @@ if (isset($_SESSION['verified-uid'])) {
               <div class="card-body">
                 <form action="code.php" method="POST" class="text-start">
                   <h4 class="text-black font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+                  <p class="text-black text-center mt-2 mb-0">Please enter your email and password to continue.</p>
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email</label>
                     <input type="email" name="user-emailaddress" class="form-control">
@@ -96,10 +83,6 @@ if (isset($_SESSION['verified-uid'])) {
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
                     <input type="password" name="user-password" class="form-control">
-                  </div>
-                  <div class="form-check form-switch d-flex align-items-center mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                    <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
                     <button type="submit" name="signin_btn" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
@@ -127,11 +110,7 @@ if (isset($_SESSION['verified-uid'])) {
             <div class="col-12 col-md-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white" target="_blank">meally</a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white" target="_blank">Blog</a>
+                  <a href="#" class="nav-link text-white">meal.ly</a>
                 </li>
               </ul>
             </div>

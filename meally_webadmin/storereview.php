@@ -1,4 +1,3 @@
-
 <?php
 include('authentication.php');
 ?>
@@ -187,6 +186,7 @@ include('authentication.php');
                                     <h6 class="text-white text-capitalize ps-3"> Store Information</h6>
                                 </div>
                             </div>
+                            <!-- store info  -->
                             <div class="card-body px-5">
                                 <?php
                                 include('dbcon.php');
@@ -238,16 +238,20 @@ include('authentication.php');
                                                     <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
                                                 </a>
                                             </li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong>
+                                                <iframe width="100%" height="500" src="https://maps.google.com/maps?q=<?= $fetcheddata['storelat'] ?>,<?= $fetcheddata['storelong'] ?>&output=embed"></iframe>
+
+                                            </li>
                                         </ul>
+
                                 <?php
 
                                     }
                                 }
                                 ?>
-
                             </div>
                         </div>
-
+                        <!-- submitted documents  -->
                         <div class="card my-5">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
@@ -272,12 +276,20 @@ include('authentication.php');
                                                 if ($fetcheddata > 0) {
                                                     $dti = pathinfo($fetcheddata['dtipermit']);
                                                     $bpermit = pathinfo($fetcheddata['bussinesspermit']);
+                                                    $bclearance = pathinfo($fetcheddata['barangayclearance']);
+                                                    $validid = pathinfo($fetcheddata['validid']);
                                             ?>
                                                     <tr>
                                                         <td class="align-middle text-left text-sm"><a href="<?= $fetcheddata['dtipermit']; ?>" target="_blank"><?= $dti['basename']; ?></a></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="align-middle text-left text-sm"><a href="<?= $fetcheddata['bussinesspermit']; ?>" target="_blank"><?= $bpermit['basename']; ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="align-middle text-left text-sm"><a href="<?= $fetcheddata['barangayclearance']; ?>" target="_blank"><?= $bclearance['basename']; ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="align-middle text-left text-sm"><a href="<?= $fetcheddata['validid']; ?>" target="_blank"><?= $validid['basename']; ?></a></td>
                                                     </tr>
                                                     <p class="text-sm">Submitted: <?= $fetcheddata['datesubmitteddoc'] ?></p>
                                             <?php

@@ -216,7 +216,7 @@ if (isset($_POST['signin_btn'])) {
                         $_SESSION['idTokenString'] = $idTokenString;
                     }
 
-                    $_SESSION['status'] = "Logged in successfully! ";
+                    $_SESSION['loggedinsuccess'] = "Logged in successfully! ";
                     header('Location: dashboard.php');
                     exit();
                 } catch (InvalidToken $e) {
