@@ -77,7 +77,7 @@ include('authentication.php');
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="#">
+          <a class="nav-link text-white " href= "stores.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -85,7 +85,7 @@ include('authentication.php');
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="#">
+          <a class="nav-link text-white " href="customers.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -197,7 +197,7 @@ include('authentication.php');
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <h4 class="mb-0">100</h4>
+                <h4 class="mb-0">0</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -214,7 +214,7 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">50</h4>
+                <h4 class="mb-0">0</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -231,7 +231,7 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">52</h4>
+                <h4 class="mb-0">0</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -247,7 +247,7 @@ include('authentication.php');
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <h4 class="mb-0">30</h4>
+                <h4 class="mb-0">0</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">

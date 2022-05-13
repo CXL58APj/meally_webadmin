@@ -169,13 +169,13 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-2">
-    <!-- Users Table Start --> 
+    <!-- Registered Customers Table Start --> 
     <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
-                <h6 class="text-white text-capitalize ps-3"> List of Stores</h6>
+                <h6 class="text-white text-capitalize ps-3"> Registered Customers</h6>
               </div>
             </div>
             <div class="card-body px-5">
@@ -183,17 +183,19 @@
                 <table id ="example" class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Address</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Registered</th>
+                      <td class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                             
+                        
+                          </td>
+                      </th>
                     </tr>
                   <tbody>
                   <?php
                     include('dbcon.php');
 
-                    $ref_table = 'stores';
+                    $ref_table = 'customers';
                     $fetchdata = $reference = $database->getReference($ref_table)->getValue();
 
                     if ($fetchdata > 0)
@@ -204,10 +206,10 @@
                           ?>
                           <tr>
                             <td><?=$i++;?></td>
-                            <td><?=$row['storename'];?></td>
-                            <td><?=$row['storeaddress'];?></td>
-                            <td><?=$row['storeowner'];?></td>
-                            <td><?=$row['storebin'];?></td>
+                            <td><?=$row['name'];?></td>
+                            <td><?=$row['dateregistered'];?></td>
+                            
+                            
                           </tr>
                         <?php
                         }
