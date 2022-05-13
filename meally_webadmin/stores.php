@@ -190,6 +190,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Controls</th>
                     </tr>
                   <tbody>
                   <?php
@@ -226,6 +227,12 @@
                             <td><?=$row['storeowner'];?></td>
                             <td><?=$row['storebin'];?></td>
                             <td><span class="<?=$badgecolor;?>"><?=$row['subend'];?> days left</span></td>
+                            <td>
+                              <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
+                                View
+                              </a>
+                              <button type="submit" name="registeruser_btn" class="btn btn-danger btn-sm my-2 mb-2">Disable</button>
+                            </td>
                           </tr>
                         <?php
                       }
