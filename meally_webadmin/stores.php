@@ -230,7 +230,7 @@ include('authentication.php');
                             <td><?=$row['storebin'];?></td>
                             <td><span class="<?=$badgecolor;?>"><?=$row['subend'];?> days left</span></td>
                             <td class="text-end">
-                              <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
+                              <a href="storeprofile.php?id=<?= $key; ?>" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
                                 View
                               </a>
                               <button type="submit" name="registeruser_btn" class="btn btn-danger btn-sm my-2 mb-2">Disable</button>
