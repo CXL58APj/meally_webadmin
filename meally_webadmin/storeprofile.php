@@ -195,6 +195,11 @@ include('authentication.php');
                                     $ref_table = 'stores';
                                     $fetcheddata = $database->getReference($ref_table)->getChild($keychild)->getValue();
                                     if ($fetcheddata > 0) {
+                                        if ($fetcheddata['subend'] < 30){
+                                            $badgecolor = "badge badge-sm bg-gradient-danger";
+                                            }else{
+                                            $badgecolor = "badge badge-sm bg-gradient-success";
+                                          }
                                 ?>
                                         <div class="row gx-4 mb-2">
                                             <div class="col-auto">
@@ -218,6 +223,7 @@ include('authentication.php');
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Owner:</strong> &nbsp; <?= $fetcheddata['storeowner'] ?></li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <?= $fetcheddata['storeemail'] ?></li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Subscription:</strong> &nbsp; <span class="<?=$badgecolor;?>"><?=$fetcheddata['subend'];?> days left</span></li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
                                                 <strong class="text-dark text-sm">Social:</strong> &nbsp;
                                                 <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="<?= $fetcheddata['storefb'] ?>">
