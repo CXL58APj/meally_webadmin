@@ -40,7 +40,6 @@ if (isset($_POST['save'])) {
         'validid' => 'uploads/storerequirements/Valid_ID.png',
         'dateregistered' => "$datem/$datedate/2022 $timea:$timeb $amorpm",
         'datesubmitteddoc' => "$datem/$datedate/2022 $timea:$timeb $amorpm",
-        'subend' => rand(10, 60),
         'storetwitter' => 'javascript:;',
         'storefb' => 'javascript:;',
         'storeig' => 'javascript:;',

@@ -11,7 +11,47 @@ use Kreait\Firebase\Exception\Messaging\InvalidArgument;
 
 session_start();
 include('dbcon.php');
+// set the default timezone to use.
+date_default_timezone_set('Asia/Hong_Kong');
+$datetoday =  date("F j, Y, g:i a");
 
+
+//decline store
+if (isset($_POST['decline_btn'])) {
+    $storekey = $_POST['decline_btn'];
+    $updateData = [
+        'status' => 'declined',
+    ];
+    $ref_table = 'stores/' . $storekey;
+    $updatequery_result = $database->getReference($ref_table)
+        ->update($updateData);
+    if ($updatequery_result) {
+        header('Location: dashboard.php');
+        exit();
+    } else {
+        echo "error";
+        exit();
+    }
+}
+// accept store
+if (isset($_POST['acceptstore_btn'])) {
+    $storekey = $_POST['acceptstore_btn'];
+    $updateData = [
+        'status' => 'inactive',
+        'approvedby' => $_SESSION['user'] . ' - ' . $_SESSION['userrole'],
+        'dateapproved' => $datetoday,
+    ];
+    $ref_table = 'stores/' . $storekey;
+    $updatequery_result = $database->getReference($ref_table)
+        ->update($updateData);
+    if ($updatequery_result) {
+        header('Location: stores.php');
+        exit();
+    } else {
+        echo "error";
+        exit();
+    }
+}
 // edit user type 
 if (isset($_POST['usertype_btn'])) {
     $uid = $_POST['usertype-user-id'];
@@ -206,11 +246,13 @@ if (isset($_POST['signin_btn'])) {
                     $_SESSION['user'] = $user->displayName;
                     $claims = $auth->getUser($uid)->customClaims;
                     if (isset($claims['admin']) == true) {
+                        $_SESSION['userrole'] = "Admin";
                         $_SESSION['admincontrol'] = "true";
                         $_SESSION['verified-admin'] = true;
                         $_SESSION['verified-uid'] = $uid;
                         $_SESSION['idTokenString'] = $idTokenString;
                     } elseif (isset($claims['staff']) == true) {
+                        $_SESSION['userrole'] = "Staff";
                         $_SESSION['verified-uid'] = $uid;
                         $_SESSION['idTokenString'] = $idTokenString;
                     }

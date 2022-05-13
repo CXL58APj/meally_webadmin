@@ -4,6 +4,7 @@ unset($_SESSION['admincontrol']);
 unset($_SESSION['user']);
 unset($_SESSION['verified-uid']);
 unset($_SESSION['idTokenString']);
+unset($_SESSION['userrole']);
 if (isset($_SESSION['verified-admin'])) {
     unset($_SESSION['verified-admin']);
     $_SESSION['logoutstatus'] = "Logged out successfully! ";

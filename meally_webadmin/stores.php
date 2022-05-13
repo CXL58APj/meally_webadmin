@@ -1,5 +1,3 @@
-
-
 <?php
 include('authentication.php');
 ?>
@@ -31,7 +29,7 @@ include('authentication.php');
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-      <!-- Navbar -->
+  <!-- Navbar -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -43,7 +41,7 @@ include('authentication.php');
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
-      <li class="nav-item mt-3">
+        <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Core</h6>
         </li>
         <li class="nav-item">
@@ -110,7 +108,7 @@ include('authentication.php');
             <li class="font-weight-bolder mb-0 breadcrumb-item text-sm text-dark active" aria-current="page">Stores </li>
 
           </ol>
-          </nav>
+        </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
           </div>
@@ -157,7 +155,7 @@ include('authentication.php');
                 </li>
               </ul>
             </li>
-                
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -173,8 +171,8 @@ include('authentication.php');
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-2">
-    <!-- Users Table Start --> 
-    <div class="row">
+      <!-- Users Table Start -->
+      <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -184,67 +182,66 @@ include('authentication.php');
             </div>
             <div class="card-body px-5">
               <div class="table-responsive p-0">
-                <table id ="example" class="table align-items-center mb-0">
+                <table id="example" class="table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-5">#</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gcash</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">Controls</th>
                     </tr>
                   <tbody>
-                  <?php
+                    <?php
                     include('dbcon.php');
 
                     $ref_table = 'stores';
-                    $fetchdata = $reference = $database->getReference($ref_table)->getValue();
+                    $fetchdata = $reference = $database->getReference($ref_table)
+                      ->orderByChild('status')
+                      ->equalTo('active')
+                      ->getValue();
 
-                    if ($fetchdata > 0)
-                    {
-                        $i = 1;
+                    if ($fetchdata > 0) {
+                      $i = 1;
 
-                        foreach($fetchdata as $key => $row)
-                        {
-                          if ($row['subend'] < 30){
+                      foreach ($fetchdata as $key => $row) {
+                        if ($row['subend'] < 30) {
                           $badgecolor = "badge badge-sm bg-gradient-danger";
-                          }else{
+                        } else {
                           $badgecolor = "badge badge-sm bg-gradient-success";
                         }
-                          ?>
-                          <tr>
-                            <td><?=$i++;?></td>
-                            <td>
+                    ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td>
                             <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="<?=$row['storepfp'];?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?=$row['storename'];?></h6>
-                            <p class="text-xs text-secondary mb-0"><?=$row['storeaddress'];?></p>
-                          </div>
-                        </div>
-                            </td>
-                            <td><?=$row['storeowner'];?></td>
-                            <td><?=$row['storebin'];?></td>
-                            <td><span class="<?=$badgecolor;?>"><?=$row['subend'];?> days left</span></td>
-                            <td class="text-end">
-                              <a href="storeprofile.php?id=<?= $key; ?>" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
-                                View
-                              </a>
-                              <button type="submit" name="registeruser_btn" class="btn btn-danger btn-sm my-2 mb-2">Disable</button>
-                            </td>
-                          </tr>
-                        <?php
+                              <div>
+                                <img src="<?= $row['storepfp']; ?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm"><?= $row['storename']; ?></h6>
+                                <p class="text-xs text-secondary mb-0"><?= $row['storeaddress']; ?></p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="text-sm"><?= $row['storeowner']; ?></td>
+                          <td class="text-sm"><?= $row['storebin']; ?></td>
+                          <td><span class="<?= $badgecolor; ?>"><?= $row['subend']; ?> days left</span></td>
+                          <td class="text-end">
+                            <a href="storeprofile.php?id=<?= $key; ?>" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
+                              View
+                            </a>
+                            <button type="submit" name="disable_btn" class="btn btn-danger btn-sm my-2 mb-2">Disable</button>
+                          </td>
+                        </tr>
+                      <?php
                       }
-                    }
-                    else
-                    {
+                    } else {
                       ?>
                       <tr>
-                        <td colspan ="5"> No Record Found</td>
-                    </tr>
+                        <td colspan="5"> No Record Found</td>
+                      </tr>
                     <?php
                     }
 
@@ -266,60 +263,59 @@ include('authentication.php');
             </div>
             <div class="card-body px-5">
               <div class="table-responsive p-0">
-                <table id ="example2" class="table align-items-center mb-0">
+                <table id="example2" class="table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-5">#</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gcash</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">Controls</th>
                     </tr>
                   <tbody>
-                  <?php
+                    <?php
                     include('dbcon.php');
 
                     $ref_table = 'stores';
-                    $fetchdata = $reference = $database->getReference($ref_table)->getValue();
+                    $fetchdata = $reference = $database->getReference($ref_table)
+                      ->orderByChild('status')
+                      ->equalTo('inactive')
+                      ->getValue();
 
-                    if ($fetchdata > 0)
-                    {
-                        $i = 1;
+                    if ($fetchdata > 0) {
+                      $i = 1;
 
-                        foreach($fetchdata as $key => $row)
-                        {
-                          ?>
-                          <tr>
-                            <td><?=$i++;?></td>
-                            <td>
+                      foreach ($fetchdata as $key => $row) {
+                    ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td>
                             <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="<?=$row['storepfp'];?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?=$row['storename'];?></h6>
-                            <p class="text-xs text-secondary mb-0"><?=$row['storeaddress'];?></p>
-                          </div>
-                        </div>
-                            </td>
-                            <td><?=$row['storeowner'];?></td>
-                            <td><?=$row['storebin'];?></td>
-                            <td class="text-end">
-                              <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
-                                View
-                              </a>
-                              <button type="submit" name="registeruser_btn" class="btn btn-success btn-sm my-2 mb-2">Enable</button>
-                            </td>
-                          </tr>
-                        <?php
+                              <div>
+                                <img src="<?= $row['storepfp']; ?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm"><?= $row['storename']; ?></h6>
+                                <p class="text-xs text-secondary mb-0"><?= $row['storeaddress']; ?></p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="text-sm"><?= $row['storeowner']; ?></td>
+                          <td class="text-sm"><?= $row['storebin']; ?></td>
+                          <td class="text-end">
+                            <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
+                              View
+                            </a>
+                            <button type="submit" name="registeruser_btn" class="btn btn-success btn-sm my-2 mb-2">Enable</button>
+                          </td>
+                        </tr>
+                      <?php
                       }
-                    }
-                    else
-                    {
+                    } else {
                       ?>
                       <tr>
-                        <td colspan ="5"> No Record Found</td>
-                    </tr>
+                        <td colspan="5"> No Record Found</td>
+                      </tr>
                     <?php
                     }
 
@@ -332,7 +328,7 @@ include('authentication.php');
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       <!-- Users Table End  -->
   </main>
   <div class="fixed-plugin">
@@ -397,24 +393,24 @@ include('authentication.php');
     </div>
   </div>
   <!--   Core JS Files   -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     $(document).ready(function() {
-    $('#example').DataTable();
+      $('#example').DataTable();
 
-} );
+    });
   </script>
-    <script>
+  <script>
     $(document).ready(function() {
-    $('#example2').DataTable();
+      $('#example2').DataTable();
 
-} );
+    });
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

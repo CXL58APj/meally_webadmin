@@ -1,4 +1,3 @@
-
 <?php
 include('authentication.php');
 ?>
@@ -195,11 +194,11 @@ include('authentication.php');
                                     $ref_table = 'stores';
                                     $fetcheddata = $database->getReference($ref_table)->getChild($keychild)->getValue();
                                     if ($fetcheddata > 0) {
-                                        if ($fetcheddata['subend'] < 30){
+                                        if ($fetcheddata['subend'] < 30) {
                                             $badgecolor = "badge badge-sm bg-gradient-danger";
-                                            }else{
+                                        } else {
                                             $badgecolor = "badge badge-sm bg-gradient-success";
-                                          }
+                                        }
                                 ?>
                                         <div class="row gx-4 mb-2">
                                             <div class="col-auto">
@@ -223,7 +222,7 @@ include('authentication.php');
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Owner:</strong> &nbsp; <?= $fetcheddata['storeowner'] ?></li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <?= $fetcheddata['storeemail'] ?></li>
-                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Subscription:</strong> &nbsp; <span class="<?=$badgecolor;?>"><?=$fetcheddata['subend'];?> days left</span></li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Subscription:</strong> &nbsp; <span class="<?= $badgecolor; ?>"><?= $fetcheddata['subend']; ?> days left</span></li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
                                                 <strong class="text-dark text-sm">Social:</strong> &nbsp;
                                                 <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="<?= $fetcheddata['storefb'] ?>">
@@ -235,6 +234,10 @@ include('authentication.php');
                                                 <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="<?= $fetcheddata['storeig'] ?>">
                                                     <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
                                                 </a>
+                                            </li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong>
+                                                <iframe width="100%" height="500" src="https://maps.google.com/maps?q=<?= $fetcheddata['storelat'] ?>,<?= $fetcheddata['storelong'] ?>&output=embed"></iframe>
+
                                             </li>
                                             <hr>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date Registered:</strong> &nbsp; <?= $fetcheddata['dateregistered'] ?></li>
