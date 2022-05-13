@@ -36,7 +36,6 @@ if (isset($_POST['usertype_btn'])) {
     }
 }
 
-
 // enable or disable user 
 if (isset($_POST['eduser_btn'])) {
     $enable_disable = $_POST['enabledisable'];

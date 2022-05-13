@@ -289,7 +289,7 @@ include('authentication.php');
                       $ref_table = 'stores';
                       $fetcheddata = $database->getReference($ref_table)
                         ->orderByChild('status')
-                        ->equalTo('new')
+                        ->equalTo('review')
                         ->getValue();
                       if ($fetcheddata > 0) {
                         $i = 1;
