@@ -218,7 +218,6 @@ include('authentication.php');
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Owner:</strong> &nbsp; <?= $fetcheddata['storeowner'] ?></li>
                                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <?= $fetcheddata['storeemail'] ?></li>
-                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date Registered:</strong> &nbsp; <?= $fetcheddata['dateregistered'] ?></li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
                                                 <strong class="text-dark text-sm">Social:</strong> &nbsp;
                                                 <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="<?= $fetcheddata['storefb'] ?>">
@@ -231,6 +230,10 @@ include('authentication.php');
                                                     <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
                                                 </a>
                                             </li>
+                                            <hr>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date Registered:</strong> &nbsp; <?= $fetcheddata['dateregistered'] ?></li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Date Approved:</strong> &nbsp; <?= $fetcheddata['dateapproved'] ?></li>
+                                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Reviewed and approved by:</strong> &nbsp; <?= $fetcheddata['approvedby'] ?></li>
                                         </ul>
                                 <?php
 
