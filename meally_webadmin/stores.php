@@ -190,7 +190,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Controls</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">Controls</th>
                     </tr>
                   <tbody>
                   <?php
@@ -227,7 +227,82 @@
                             <td><?=$row['storeowner'];?></td>
                             <td><?=$row['storebin'];?></td>
                             <td><span class="<?=$badgecolor;?>"><?=$row['subend'];?> days left</span></td>
+                            <td class="text-end">
+                              <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
+                                View
+                              </a>
+                              <button type="submit" name="registeruser_btn" class="btn btn-danger btn-sm my-2 mb-2">Disable</button>
+                            </td>
+                          </tr>
+                        <?php
+                      }
+                    }
+                    else
+                    {
+                      ?>
+                      <tr>
+                        <td colspan ="5"> No Record Found</td>
+                    </tr>
+                    <?php
+                    }
+
+                    ?>
+
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- inactive stores  -->
+          <div class="card my-5">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
+                <h6 class="text-white text-capitalize ps-3">In-active Stores</h6>
+              </div>
+            </div>
+            <div class="card-body px-5">
+              <div class="table-responsive p-0">
+                <table id ="example2" class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-5">#</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">Controls</th>
+                    </tr>
+                  <tbody>
+                  <?php
+                    include('dbcon.php');
+
+                    $ref_table = 'stores';
+                    $fetchdata = $reference = $database->getReference($ref_table)->getValue();
+
+                    if ($fetchdata > 0)
+                    {
+                        $i = 1;
+
+                        foreach($fetchdata as $key => $row)
+                        {
+                          ?>
+                          <tr>
+                            <td><?=$i++;?></td>
                             <td>
+                            <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="<?=$row['storepfp'];?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><?=$row['storename'];?></h6>
+                            <p class="text-xs text-secondary mb-0"><?=$row['storeaddress'];?></p>
+                          </div>
+                        </div>
+                            </td>
+                            <td><?=$row['storeowner'];?></td>
+                            <td><?=$row['storebin'];?></td>
+                            <td class="text-end">
                               <a href="#" name="view_btn" class="btn btn-info btn-sm my-2 mb-2">
                                 View
                               </a>
@@ -330,6 +405,12 @@
   <script>
     $(document).ready(function() {
     $('#example').DataTable();
+
+} );
+  </script>
+    <script>
+    $(document).ready(function() {
+    $('#example2').DataTable();
 
 } );
   </script>
