@@ -197,7 +197,7 @@ include('authentication.php');
                     include('dbcon.php');
 
                     $ref_table = 'stores';
-                    $fetchdata = $reference = $database->getReference($ref_table)
+                    $fetchdata  = $database->getReference($ref_table)
                       ->orderByChild('status')
                       ->equalTo('active')
                       ->getValue();

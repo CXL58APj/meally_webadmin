@@ -1,9 +1,17 @@
 <?php
-// PHP program using trim() 
+// set the default timezone to use.
+date_default_timezone_set('Asia/Hong_Kong');
+$month  = date('n');
+$date  = date('j');
+echo $month . "<br>";
+echo $date;
 
-$str = "  Hire freelance developer ";
+$currentm  = date('n');
+$currentd  = date('j');
 
-// Since a second parameter was not passed
-// leading and trailing whitespaces are removed
-$str = str_replace(' ', '', $str);
-echo $str;
+if ($currentm > $month) {
+} else {
+    if ($currentd > $date) {
+        // execute ng code
+    }
+}
