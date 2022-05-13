@@ -189,6 +189,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Store Owner</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription</th>
                     </tr>
                   <tbody>
                   <?php
@@ -200,8 +201,14 @@
                     if ($fetchdata > 0)
                     {
                         $i = 1;
+
                         foreach($fetchdata as $key => $row)
                         {
+                          if ($row['subend'] < 30){
+                          $badgecolor = "badge badge-sm bg-gradient-danger";
+                          }else{
+                          $badgecolor = "badge badge-sm bg-gradient-success";
+                        }
                           ?>
                           <tr>
                             <td><?=$i++;?></td>
@@ -218,9 +225,10 @@
                             </td>
                             <td><?=$row['storeowner'];?></td>
                             <td><?=$row['storebin'];?></td>
+                            <td><span class="<?=$badgecolor;?>"><?=$row['subend'];?> days left</span></td>
                           </tr>
                         <?php
-                        }
+                      }
                     }
                     else
                     {
