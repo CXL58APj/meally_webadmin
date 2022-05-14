@@ -1,18 +1,3 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.0.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <?php
 include('authentication.php');
 ?>
@@ -25,7 +10,7 @@ include('authentication.php');
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/meally_fav.png">
   <link rel="icon" type="image/png" href="assets/img/meally_fav.png">
   <title>
-    meally webADMIN
+    <?= $_SESSION['user']; ?> Profile
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -117,7 +102,7 @@ include('authentication.php');
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Account Settings</li>
-            <li class="font-weight-bolder mb-0 breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
+            <li class="font-weight-bolder mb-0 breadcrumb-item text-sm text-dark active" aria-current="page"><?= $_SESSION['user']; ?></li>
           </ol>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -182,6 +167,31 @@ include('authentication.php');
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid px-2 px-md-4">
+      <!-- Confirmation Messages  -->
+      <?php
+      // 1. Sucessfully updated profile confirmation message 
+      if (isset($_SESSION['updateprofilesuccess'])) {
+        echo
+        "<div class='alert alert-success alert-dismissible fade show' role='alert' style='color:white;'>
+                      <span class='alert-text'><strong>" . $_SESSION['updateprofilesuccess'] . "</strong></span>
+                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden='true'>&times;</span>
+                      </button>
+                  </div>";
+        unset($_SESSION['updateprofilesuccess']);
+      }
+      // 2. Failed to update profile confirmation message 
+      if (isset($_SESSION['updateprofilefailed'])) {
+        echo
+        "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
+                      <span class='alert-text'><strong>" . $_SESSION['updateprofilefailed'] . "</strong></span>
+                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden='true'>&times;</span>
+                      </button>
+                  </div>";
+        unset($_SESSION['updateprofilefailed']);
+      }
+      ?>
       <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
         <span class="mask  bg-gradient-primary  opacity-6"></span>
       </div>
@@ -203,11 +213,11 @@ include('authentication.php');
                     <!-- load all the information of the user from the database  -->
                     <div class="col-md-4">
                       <div class="form-group border mb-3">
-                        <img src="<?= $user->photoUrl; ?>" alt="Profile Picture" class="w-50">
+                        <img src="<?= $user->photoUrl; ?>" alt="Profile Picture" id="img" class="w-50">
                       </div>
                       <label for="">Update Profile Picture</label>
                       <div class="input-group input-group-outline mb-4">
-                        <input type="file" name="profile" id="" class="form-control">
+                        <input type="file" name="profile" id="profile">
                       </div>
                     </div>
                     <div class="card-header pb-3 p-0">
@@ -251,11 +261,11 @@ include('authentication.php');
                     </div>
                     <div class="input-group input-group-static mb-4">
                       <label>New Password</label>
-                      <input type="password" name="newpassword" class="form-control" required>
+                      <input type="password" name="newpassword" class="form-control">
                     </div>
                     <div class="input-group input-group-static mb-4">
                       <label>Re-type Password</label>
-                      <input type="password" name="retypepassword" class="form-control" required>
+                      <input type="password" name="retypepassword" class="form-control">
                     </div>
                     <div class="text-right">
                       <button type="submit" name="updateprofile_btn" class="btn bg-gradient-primary my-2 mb-2">Save Changes</button>
@@ -352,6 +362,15 @@ include('authentication.php');
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <!-- preview image  -->
+  <script>
+    profile.onchange = evt => {
+      const [file] = profile.files;
+      if (file) {
+        img.src = URL.createObjectURL(file);
+      }
+    }
+  </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

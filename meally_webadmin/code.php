@@ -25,6 +25,18 @@ if (isset($_POST['updateprofile_btn'])) {
     $user = $auth->getUser($uid);
     $newimg = $randomnum . $photo;
     $oldimg = $user->photoUrl;
+    $newpass = $_POST['newpassword'];
+    $retype = $_POST['retypepassword'];
+
+    if ($newpass != NULL && $retype != NULL) {
+        if ($newpass == $retype) {
+            $updatedUser = $auth->changeUserPassword($uid, $newpass);
+        } else {
+            $_SESSION['updateprofilefailed'] = "Update failed. Password didn't match!";
+            header('Location: profile.php');
+            exit();
+        }
+    }
 
     if ($photo != NULL) {
         $filename = 'uploads/' . $newimg;
@@ -47,16 +59,17 @@ if (isset($_POST['updateprofile_btn'])) {
                 unlink($oldimg);
             }
         }
-        $_SESSION['updatedusersucess'] = "Success!";
-        header('Location: systemusers.php');
+        $_SESSION['updateprofilesuccess'] = "Successfully updated profile!";
+        header('Location: profile.php');
         exit();
     } else {
-        $_SESSION['updateduserfailed'] = "Failed!";
-        header('Location: systemusers.php');
+        $_SESSION['updateprofilefailed'] = "Failed to update profile. Please try again.";
+        header('Location: profile.php');
         exit();
     }
 }
 
+///////////////////////////// END ADMIN CONTROLS///////////////////////////
 //decline store
 if (isset($_POST['declinestore_btn'])) {
     $storekey = $_POST['declinestore_btn'];
@@ -268,7 +281,7 @@ if (isset($_POST['registeruser_btn'])) {
         exit();
     }
 }
-
+///////////////////////////// END ADMIN CONTROLS///////////////////////////
 // sign-in 
 if (isset($_POST['signin_btn'])) {
     $email = $_POST['user-emailaddress'];
