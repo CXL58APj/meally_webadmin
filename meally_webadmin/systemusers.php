@@ -10,7 +10,7 @@ include('adminauth.php');
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/meally_fav.png">
   <title>
-    meally
+    meally webAdmin - System Users
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -232,7 +232,7 @@ include('adminauth.php');
       if (isset($_SESSION['updatedusersucess'])) {
         echo
         "<div class='alert alert-success alert-dismissible fade show' role='alert' style='color:white;'>
-                      <span class='alert-text'><strong>" . $_SESSION['updatedusersucess'] . "</strong> User has been removed!</span>
+                      <span class='alert-text'><strong>" . $_SESSION['updatedusersucess'] . "</strong> User has been updated!</span>
                       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
                       <span aria-hidden='true'>&times;</span>
                       </button>
@@ -317,7 +317,7 @@ include('adminauth.php');
                     </ul>
                   </div>
                 </div>
-                <h6 class="text-white text-capitalize ps-3"> List of Users</h6>
+                <h6 class="text-white text-capitalize ps-3">System Users</h6>
               </div>
             </div>
             <div class="card-body px-5">
@@ -327,7 +327,6 @@ include('adminauth.php');
                     <tr>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fullname</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Controls</th>
@@ -345,8 +344,18 @@ include('adminauth.php');
                       ?>
                         <tr>
                           <td class="align-middle text-center text-sm"><?= $i++; ?></td>
-                          <td class="align-middle text-center text-sm"><?= $user->displayName; ?></td>
-                          <td class="align-middle text-center text-sm"><?= $user->email ?></td>
+                          <td class="text-sm">
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img src="<?= $user->photoUrl; ?>" class="avatar avatar-l me-3 border-radius-lg" alt="Store Imge">
+                              </div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm"> <?= $user->displayName; ?></h6>
+                                <p class="text-xs text-secondary mb-0"><?= $user->email ?></p>
+                              </div>
+                            </div>
+
+                          </td>
                           <td class="align-middle text-center text-sm">
                             <?php
                             $claims = $auth->getUser($user->uid)->customClaims;
@@ -519,7 +528,7 @@ include('adminauth.php');
   <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#example').DataTable();
+      $('#example').DataTable({});
 
     });
   </script>

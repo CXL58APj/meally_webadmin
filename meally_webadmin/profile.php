@@ -185,129 +185,106 @@ include('authentication.php');
       <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
         <span class="mask  bg-gradient-primary  opacity-6"></span>
       </div>
+
+      <!-- Form Start -->
       <div class="card card-body mx-3 mx-md-4 mt-n6">
-        <!-- <div class="row gx-4 mb-2">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-            </div>
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">
-                Richard Davis
-              </h5>
-              <p class="mb-0 font-weight-normal text-sm">
-                CEO / Co-Founder
-              </p>
-            </div>
-          </div>
-        </div> -->
         <div class="row">
-          <div class="row">
-            <div class="col-12">
-              <div class="card card-plain h-100">
-
-                <div class="card-body p-3">
-                  <form action="code.php" method="POST" role="form" class="text-start">
-                    <?php
-                    include('dbcon.php');
-
-                    $uid = $_SESSION['verified-uid'];
-
-                    try {
-                      $user = $auth->getUser($uid);
-                    ?>
-                      <div class="card-header pb-3 p-0">
-                        <div class="row">
-                          <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Profile Picture</h6>
-                          </div>
-                        </div>
+          <div class="col-12">
+            <div class="card card-plain h-100">
+              <div class="card-body p-3">
+                <form action="code.php" method="POST" role="form" class="text-start">
+                  <?php
+                  // get the user-id from the database of the current user 
+                  include('dbcon.php');
+                  $uid = $_SESSION['verified-uid'];
+                  try {
+                    $user = $auth->getUser($uid);
+                  ?>
+                    <!-- load all the information of the user from the database  -->
+                    <div class="col-md-4">
+                      <div class="form-group border mb-3">
+                        <img src="<?= $user->photoUrl; ?>" alt="Profile Picture" class="w-50">
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group border mb-3">
-                          <img src="<?= $user->photoUrl; ?>" alt="Profile Picture" class="w-50">
-                        </div>
-                        <label for="">Upload Profile Picture</label>
-                        <div class="input-group input-group-outline mb-4">
-                          <input type="file" name="profile" id="" class="form-control">
-                        </div>
+                      <label for="">Update Profile Picture</label>
+                      <div class="input-group input-group-outline mb-4">
+                        <input type="file" name="profile" id="" class="form-control">
                       </div>
-                      <div class="card-header pb-3 p-0">
-                        <div class="row">
-                          <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Account Information</h6>
-                          </div>
-                        </div>
-                      </div>
-                      <input type="hidden" name="user-id" value="<?= $uid; ?>">
-                      <div class="input-group input-group-static mb-4">
-                        <label>Email</label>
-                        <input type="email" name="display_useremail" value="<?= $user->email; ?>" class="form-control" required>
-                      </div>
-                      <div class="input-group input-group-static mb-4">
-                        <label>Fullname</label>
-                        <input type="text" name="display_userfullname" value="<?= $user->displayName; ?>" class="form-control" required>
-                      </div>
-                      <div class="input-group input-group-static mb-5">
-                        <label>Account Type</label>
-                        <select name="roles" class="form-control" required>
-                          <?php
-                          if (isset($claims['admin']) == true) {
-                            echo
-                            "<option value='admin' selected>Administrator</option>
-                            <option value='staff'>Staff</option>";
-                          } elseif (isset($claims['staff']) == true) {
-                            echo
-                            "<option value='admin'>Administrator</option>
-                            <option value='staff' selected>Staff</option>";
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      <div class="card-header pb-3 p-0">
-                        <div class="row">
-                          <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Change Password</h6>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="input-group input-group-static mb-4">
-                        <label>New Password</label>
-                        <input type="password" name="newpassword" class="form-control" required>
-                      </div>
-                      <div class="input-group input-group-static mb-4">
-                        <label>Re-type Password</label>
-                        <input type="password" name="retypepassword" class="form-control" required>
-                      </div>
-                      <div class="text-right">
-                        <button type="submit" name="updateuser_btn" class="btn bg-gradient-primary my-2 mb-2">Save Changes</button>
-                      </div>
-
-                    <?php
-                    } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
-                      echo $e->getMessage();
-                    }
-                    ?>
-                  </form>
-                  <div class="card-header pb-3 px-2">
-                    <div class="row">
-                      <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-0">Account Deactivation</h6>
-                      </div>
-                      <form action="code.php" method="POST">
-                        <p class="text-sm"><span style="color:red"><strong>Important:</strong></span> This action cannot be revert. </p>
-                        <div class="text-left">
-                          <button type="submit" name="deactaccount_btn" class="btn bg-gradient-danger my-2 mb-2">Deactivate account</button>
-                        </div>
-                      </form>
                     </div>
+                    <div class="card-header pb-3 p-0">
+                      <div class="row">
+                        <div class="col-md-8 d-flex align-items-center">
+                          <h6 class="mb-0">Account Information</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" name="user-id" value="<?= $uid; ?>">
+                    <div class="input-group input-group-static mb-4">
+                      <label>Email</label>
+                      <input type="email" name="display_useremail" value="<?= $user->email; ?>" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-static mb-4">
+                      <label>Fullname</label>
+                      <input type="text" name="display_userfullname" value="<?= $user->displayName; ?>" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-static mb-5">
+                      <label>Account Type</label>
+                      <select name="roles" class="form-control" required>
+                        <?php
+                        if (isset($claims['admin']) == true) {
+                          echo
+                          "<option value='admin' selected>Administrator</option>
+                            <option value='staff'>Staff</option>";
+                        } elseif (isset($claims['staff']) == true) {
+                          echo
+                          "<option value='admin'>Administrator</option>
+                            <option value='staff' selected>Staff</option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="card-header pb-3 p-0">
+                      <div class="row">
+                        <div class="col-md-8 d-flex align-items-center">
+                          <h6 class="mb-0">Change Password</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input-group input-group-static mb-4">
+                      <label>New Password</label>
+                      <input type="password" name="newpassword" class="form-control" required>
+                    </div>
+                    <div class="input-group input-group-static mb-4">
+                      <label>Re-type Password</label>
+                      <input type="password" name="retypepassword" class="form-control" required>
+                    </div>
+                    <div class="text-right">
+                      <button type="submit" name="updateprofile_btn" class="btn bg-gradient-primary my-2 mb-2">Save Changes</button>
+                    </div>
+
+                  <?php
+                  } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+                    echo $e->getMessage();
+                  }
+                  ?>
+                </form>
+                <!-- Form End  -->
+                <div class="card-header pb-3 px-2">
+                  <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                      <h6 class="mb-0">Account Deactivation</h6>
+                    </div>
+                    <form action="code.php" method="POST">
+                      <p class="text-sm"><span style="color:red"><strong>Important:</strong></span> This action cannot be revert. </p>
+                      <div class="text-left">
+                        <button type="submit" name="deactaccount_btn" class="btn bg-gradient-danger my-2 mb-2">Deactivate account</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
