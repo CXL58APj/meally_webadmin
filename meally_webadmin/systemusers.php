@@ -1,18 +1,3 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.0.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
 <?php
 include('adminauth.php');
 ?>
@@ -167,7 +152,6 @@ include('adminauth.php');
                 </li>
               </ul>
             </li>
-
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -183,7 +167,8 @@ include('adminauth.php');
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-2">
-      <!-- Start : Created user success  message -->
+      <!-- Start: Confirmation Messages  -->
+      <!-- 1. Sucessfully created user confirmation  message  -->
       <?php
       if (isset($_SESSION['createdusersuccess'])) {
         echo
@@ -195,6 +180,7 @@ include('adminauth.php');
                 </div>";
         unset($_SESSION['createdusersuccess']);
       }
+      // 2. Failed creating user confirmation message 
       if (isset($_SESSION['createduserfailed'])) {
         echo
         "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
@@ -205,6 +191,7 @@ include('adminauth.php');
                 </div>";
         unset($_SESSION['createduserfailed']);
       }
+      // 3. Invalid email address validation message 
       if (isset($_SESSION['invalidemail'])) {
         echo
         "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
@@ -216,8 +203,7 @@ include('adminauth.php');
         unset($_SESSION['invalidemail']);
       }
       ?>
-
-      <!-- Start : Deleted user success  message -->
+      <!-- 4. Sucessfully deleted user confirmation message  -->
       <?php
       if (isset($_SESSION['deletedusersuccess'])) {
         echo
@@ -229,6 +215,7 @@ include('adminauth.php');
                   </div>";
         unset($_SESSION['deletedusersuccess']);
       }
+      // 5. Failed to delete user confirmation message 
       if (isset($_SESSION['deleteduserfailed'])) {
         echo
         "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
@@ -240,8 +227,7 @@ include('adminauth.php');
         unset($_SESSION['deleteduserfailed']);
       }
       ?>
-
-      <!-- Start : updated user account info success  message -->
+      <!-- 6. Successfully created user confirmation message  -->
       <?php
       if (isset($_SESSION['updatedusersucess'])) {
         echo
@@ -253,6 +239,7 @@ include('adminauth.php');
                   </div>";
         unset($_SESSION['updatedusersucess']);
       }
+      // 7. Failed to update user confirmation message 
       if (isset($_SESSION['updateduserfailed'])) {
         echo
         "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
@@ -264,18 +251,19 @@ include('adminauth.php');
         unset($_SESSION['updateduserfailed']);
       }
       ?>
-      <!-- updated user account password  message -->
+      <!-- 8. Successfully changed user password confirmation message  -->
       <?php
       if (isset($_SESSION['passwordchangessuccess'])) {
         echo
         "<div class='alert alert-success alert-dismissible fade show' role='alert' style='color:white;'>
-                      <span class='alert-text'><strong>" . $_SESSION['passwordchangessuccess'] . "</strong> Password hsa been successfully updated!</span>
+                      <span class='alert-text'><strong>" . $_SESSION['passwordchangessuccess'] . "</strong> Password has been successfully updated!</span>
                       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
                       <span aria-hidden='true'>&times;</span>
                       </button>
                   </div>";
         unset($_SESSION['passwordchangessuccess']);
       }
+      // 9. Failed to update user password confrimation message 
       if (isset($_SESSION['passwordchangesfailed'])) {
         echo
         "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color:white;'>
@@ -287,7 +275,7 @@ include('adminauth.php');
         unset($_SESSION['passwordchangesfailed']);
       }
       ?>
-      <!-- enable disable message  -->
+      <!-- 10. Successfully enabled/disabled user confirmation message  -->
       <?php
       if (isset($_SESSION['enabledisablesuccess'])) {
         echo
@@ -300,17 +288,17 @@ include('adminauth.php');
         unset($_SESSION['enabledisablesuccess']);
       }
       ?>
+      <!-- 11. Sucessfully changed user role confirmation message  -->
       <?php
-      // change user role message 
-      if (isset($_SESSION['usersuccess'])) {
+      if (isset($_SESSION['success_updated_role'])) {
         echo
         "<div class='alert alert-success alert-dismissible fade show' role='alert' style='color:white;'>
-                      <span class='alert-text'><strong>" . $_SESSION['usersuccess'] . "</strong></span>
+                      <span class='alert-text'><strong>" . $_SESSION['success_updated_role'] . "</strong></span>
                       <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
                       <span aria-hidden='true'>&times;</span>
                       </button>
                   </div>";
-        unset($_SESSION['usersuccess']);
+        unset($_SESSION['success_updated_role']);
       }
       ?>
       <!-- Users Table Start -->
@@ -402,7 +390,7 @@ include('adminauth.php');
               </div>
             </div>
           </div>
-          <!-- new user form  -->
+          <!-- Create New User Form  -->
           <div class="card my-5">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-2">
@@ -439,8 +427,8 @@ include('adminauth.php');
                   <div class="form-group border mb-3">
                     <img src="" id="img" alt="Profile Picture" class="w-50">
                   </div>
-                  <div class="input-group input-group-outline mb-4" class="form-control" required>
-                    <input type="file" name="imgfile" id="imgfile">
+                  <div class="input-group input-group-outline mb-4" class="form-control">
+                    <input type="file" name="imgfile" id="imgfile" required>
                   </div>
                 </div>
                 <div class="text-left">
@@ -449,7 +437,6 @@ include('adminauth.php');
               </form>
             </div>
           </div>
-
           <!-- Users Table End  -->
   </main>
   <div class="fixed-plugin">

@@ -15,6 +15,47 @@ include('dbcon.php');
 date_default_timezone_set('Asia/Hong_Kong');
 $datetoday =  date("F j, Y, g:i a");
 
+// Update Own Profile
+if (isset($_POST['updateprofile_btn'])) {
+    $randomnum = rand(1111, 9999);
+    $email = $_POST['display_useremail'];
+    $displayName = $_POST['display_userfullname'];
+    $photo = $_FILES['display_imgfile']['name'];
+    $uid = $_POST['user-id'];
+    $user = $auth->getUser($uid);
+    $newimg = $randomnum . $photo;
+    $oldimg = $user->photoUrl;
+
+    if ($photo != NULL) {
+        $filename = 'uploads/' . $newimg;
+    } else {
+        $filename =  $oldimg;
+    }
+    $properties = [
+        'displayName' => $displayName,
+        'email' =>  $email,
+        'photoUrl' => $filename,
+    ];
+
+    $updatedUser = $auth->updateUser($uid, $properties);
+    // $updatedUser = $auth->changeUserEmail($uid, $properties);
+
+    if ($updatedUser) {
+        if ($photo != NULL) {
+            move_uploaded_file($_FILES['display_imgfile']['tmp_name'], "uploads/" . $newimg);
+            if ($oldimg != NULL) {
+                unlink($oldimg);
+            }
+        }
+        $_SESSION['updatedusersucess'] = "Success!";
+        header('Location: systemusers.php');
+        exit();
+    } else {
+        $_SESSION['updateduserfailed'] = "Failed!";
+        header('Location: systemusers.php');
+        exit();
+    }
+}
 
 //decline store
 if (isset($_POST['declinestore_btn'])) {
@@ -66,7 +107,7 @@ if (isset($_POST['usertype_btn'])) {
     } else {
     }
     if ($msg) {
-        $_SESSION['usersuccess'] = $msg;
+        $_SESSION['success_updated_role'] = $msg;
         header('Location: systemusers.php');
         exit();
     } else {
