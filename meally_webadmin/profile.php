@@ -284,7 +284,7 @@ include('authentication.php');
                       <h6 class="mb-0">Account Deactivation</h6>
                     </div>
                     <form action="code.php" method="POST">
-                      <p class="text-sm"><span style="color:red"><strong>Important:</strong></span> This action cannot be revert. </p>
+                      <p class="text-sm"><span style="color:red"><strong>Important:</strong></span> This action cannot be reverted. </p>
                       <div class="text-left">
                         <button type="submit" name="deactaccount_btn" class="btn bg-gradient-danger my-2 mb-2">Deactivate account</button>
                       </div>

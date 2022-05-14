@@ -15,6 +15,14 @@ include('dbcon.php');
 date_default_timezone_set('Asia/Hong_Kong');
 $datetoday =  date("F j, Y, g:i a");
 
+
+// deactivate account 
+if (isset($_POST['deactaccount_btn'])) {
+    $uid = $_SESSION['verified-uid'];
+    $updatedUser = $auth->disableUser($uid);
+    header('Location: signout.php');
+    exit();
+}
 // Update Own Profile
 if (isset($_POST['updateprofile_btn'])) {
     $randomnum = rand(1111, 9999);
