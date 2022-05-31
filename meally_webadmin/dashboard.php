@@ -207,12 +207,7 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">
-                <?php
-              $ref_table = 'stores';
-             $total_count = $database->getReference($ref_table) ->getSnapshot()->numChildren();
-             echo $total_count;
-?>
+                <h4 class="mb-0">50
                 </h4>
               </div>
             </div>
