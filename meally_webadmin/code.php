@@ -95,25 +95,7 @@ if (isset($_POST['declinestore_btn'])) {
         exit();
     }
 }
-// accept store
-if (isset($_POST['acceptstore_btn'])) {
-    $storekey = $_POST['acceptstore_btn'];
-    $updateData = [
-        'status' => 'inactive',
-        'approvedby' => $_SESSION['user'] . ' - ' . $_SESSION['userrole'],
-        'dateapproved' => $datetoday,
-    ];
-    $ref_table = 'stores/' . $storekey;
-    $updatequery_result = $database->getReference($ref_table)
-        ->update($updateData);
-    if ($updatequery_result) {
-        header('Location: stores.php');
-        exit();
-    } else {
-        echo "error";
-        exit();
-    }
-}
+
 // edit user type 
 if (isset($_POST['usertype_btn'])) {
     $uid = $_POST['usertype-user-id'];

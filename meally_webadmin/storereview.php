@@ -215,7 +215,7 @@ include('authentication.php');
                                             <!-- buttons and shit  -->
                                             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                                                 <div class="nav-wrapper position-relative text-end">
-                                                    <form action="code.php" method="POST">
+                                                    <form action="reviewmail.php" method="POST">
                                                         <button type="submit" name="acceptstore_btn" value="<?= $keychild; ?>" class="btn bg-gradient-success">ACCEPT</button>
                                                         <button type="submit" name="declinestore_btn" value="<?= $keychild; ?>" class="btn bg-gradient-danger">DECLINE</button>
                                                     </form>
