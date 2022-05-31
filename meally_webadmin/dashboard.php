@@ -55,7 +55,7 @@ include('authentication.php');
         </li>
         <!-- MANAGEMENT  -->
         <li class="nav-item">
-          <a class="nav-link text-white " href="#">
+          <a class="nav-link text-white " href="billing.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -183,12 +183,19 @@ include('authentication.php');
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <h4 class="mb-0">100</h4>
+                <h4 class="mb-0">
+                <?php
+              $ref_table = 'Customers';
+             $total_count = $database->getReference($ref_table) ->getSnapshot()->numChildren();
+             echo $total_count;
+?>
+                </h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
               <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></span>Total Customer</p>
+            
             </div>
           </div>
         </div>
@@ -200,7 +207,13 @@ include('authentication.php');
               </div>
               <div class="text-end pt-1">
 
-                <h4 class="mb-0">50</h4>
+                <h4 class="mb-0">
+                <?php
+              $ref_table = 'stores';
+             $total_count = $database->getReference($ref_table) ->getSnapshot()->numChildren();
+             echo $total_count;
+?>
+                </h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
